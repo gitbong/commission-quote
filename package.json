@@ -1,0 +1,30 @@
+{
+  "name": "commission-quote",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "concurrently -n mock,bff,web -c blue,green,magenta \"npm start -w apps/mock-vendor\" \"npm start -w apps/bff\" \"npm start -w apps/web\"",
+    "dev": "concurrently -n mock,bff,web -c blue,green,magenta \"npm run dev -w apps/mock-vendor\" \"npm run dev -w apps/bff\" \"npm run dev -w apps/web\"",
+    "dev:mock-vendor": "npm run dev -w apps/mock-vendor",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "lint": "npm run lint -w apps/web -w apps/bff"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "concurrently": "^10.0.6",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "typescript-eslint": "^8.72.1"
+  }
+}
